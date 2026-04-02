@@ -1,10 +1,10 @@
 ---
-title: Установка и настройка S-UI (Sing-box)
+title: Установка и настройка S-UI
 description: Подробное руководство по развертыванию панели S-UI от alireza0. Настройка Hysteria 2, VLESS-Reality и маршрутизации через WARP.
 sidebar_position: 3
 ---
 
-# Установка и настройка панели S-UI от alireza0
+# Установка и настройка панели S-UI
 
 В предыдущих статьях мы рассматривали панель 3x-ui на базе Xray-core. А теперь детально разберем панель **S-UI** (от разработчика alireza0). 
 
@@ -116,21 +116,22 @@ Key is saved at:         /etc/letsencrypt/live/[net.free.com/privkey.pem](https:
 
 На этом работа в терминале закончена. Переходим в браузере по ссылке, которую мы сохранили после установки панели, и авторизуемся.
 
-### Шаг 1: Настройка доступа к панели
+### Настройка доступа к панели
 
 1.  Переходим в **Settings** -\> раздел **Panel**.
 2.  Заполняем данные для того, чтобы панель открывалась по нашему красивому поддомену с HTTPS. Указываем порт `8443`, ваш поддомен, и прописываем пути к сертификатам, полученным от Certbot.
 
-![x-ui pro Panel](./img/s-ui-settings-interface.png)
+![s-ui settings interface](./img/s-ui-settings-interface.png)
 
 Сохраняем (Save) и перезапускаем панель (Restart). Теперь заходим в панель уже по новому адресу: `https://net.free.com:8443/...`
 
-### Шаг 2: Настройка ссылок на подписку
+### Настройка ссылок на подписку
 
 1.  Снова идем в **Settings** -\> раздел **Subscription**.
-2.  Указываем порт `443`, ваш поддомен и те же пути к сертификатам. Это нужно, чтобы клиентские приложения могли безопасно скачивать ваши конфиги.
+2.  Указываем порт `443`, ваш поддомен и те же пути к сертификатам. Это нужно, чтобы клиентские приложения могли безопасно скачивать ваши конфиги. 
+3.  Сохраняем и перезапускаем панель.
 
-Сохраняем и перезапускаем панель.
+![s-ui settings subscription](./img/s-ui-settings-sub.png)
 
 -----
 
@@ -139,10 +140,14 @@ Key is saved at:         /etc/letsencrypt/live/[net.free.com/privkey.pem](https:
 Мы направим исходящий трафик сервера через Cloudflare WARP. Это поможет скрыть IP-адрес вашего VPS от целевых сайтов и избежать капчи (например, при использовании Google или ChatGPT).
 
 1.  Переходим в раздел **Endpoints** и нажимаем **Add**.
-2.  В поле **Type** выбираем **WireGuard / WARP**. Настройки можно оставить по умолчанию или сгенерировать новые ключи. Сохраняем.
+2.  В поле **Type** выбираем **WARP**. Остальное оставляем по умолчанию. Сохраняем.
+
+![s-ui warp](./img/s-ui-warp.png)
 
 3.  Теперь нужно указать ядру использовать этот Endpoint. Переходим в **Rules**.
 4.  В поле **Default Outbound** (Действие по умолчанию) выбираем созданный нами WARP. Сохраняем.
+
+![s-ui warp default outbound](./img/s-ui-rules-warp-default-outbound.png)
 
 -----
 
@@ -155,9 +160,11 @@ Key is saved at:         /etc/letsencrypt/live/[net.free.com/privkey.pem](https:
 **Для Hysteria 2:**
 
 1.  Переходим в **TLS Settings**, нажимаем **Add**.
-2.  Называем профиль (например, `TLS-Hysteria`).
+2.  Называем профиль (например, `Hysteria2_TLS`).
 3.  Генерируем ключи нажатием на иконку ключа.
 4.  **Обязательно** включаем `Allow Insecure`. Сохраняем.
+
+![s-ui warp hy2 tls](./img/s-ui-hy2-tls.png)
 
 **Для VLESS-Reality:**
 
@@ -168,6 +175,8 @@ Key is saved at:         /etc/letsencrypt/live/[net.free.com/privkey.pem](https:
 5.  **Handshake Server**: указываем наш поддомен (`net.free.com`).
 6.  Генерируем ключи (иконка ключа).
 7.  В поле **Fingerprint** выбираем `Firefox` или `Chrome`. Сохраняем.
+
+![s-ui warp self reality](./img/s-ui-self-reality.png)
 
 ### Создание точек входа (Inbounds)
 
@@ -183,6 +192,8 @@ Key is saved at:         /etc/letsencrypt/live/[net.free.com/privkey.pem](https:
 6.  В разделе *Hysteria2 Options* включаем `Obfuscated Password`. Появится поле — придумайте сложный пароль обфускации от 16 символов.
 7.  В поле **TLS** выбираем созданный ранее `TLS-Hysteria`. Сохраняем.
 
+![s-ui warp hy2 inbound](./img/s-ui-hy2-inbound.png)
+
 **Создаем подключение VLESS:**
 
 1.  Снова нажимаем **Add**.
@@ -192,6 +203,8 @@ Key is saved at:         /etc/letsencrypt/live/[net.free.com/privkey.pem](https:
 5.  В поле **TLS** выбираем наш `Reality-VLESS`.
 6.  Включаем `Enable Multiplex` для улучшения стабильности соединений. Сохраняем.
 
+![s-ui warp vless-reality inbound](./img/s-ui-vless-reality-inbound.png)
+
 -----
 
 ## Создание клиента и получение подписки
@@ -200,7 +213,9 @@ Key is saved at:         /etc/letsencrypt/live/[net.free.com/privkey.pem](https:
 
 1.  Переходим в раздел **Clients**. Нажимаем **Add**.
 2.  В поле **Name** вводите любое имя пользователя (например, `my-phone` или `first`).
-3.  В поле **Inbound Tags** ставим галочки напротив обоих созданных подключений (`in-hysteria2` и `in-vless`). Сохраняем.
+3.  В поле **Inbound Tags** ставим галочки напротив обоих созданных подключений. Сохраняем.
+
+![s-ui warp client setup](./img/s-ui-client-setup.png)
 
 ### Как подключиться?
 
