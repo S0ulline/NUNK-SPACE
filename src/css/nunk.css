@@ -214,15 +214,44 @@ html[data-theme='dark'] {
 
 /* --- NAVBAR (ВЕРХНЯЯ ПАНЕЛЬ) --- */
 .navbar {
-    height: var(--ifm-navbar-height) !important;
-    background: var(--ifm-navbar-background-color) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    /* Убираем жесткую высоту и backdrop-filter, чтобы не ломать мобильное меню.
+       Высота и так подтянется из переменной --ifm-navbar-height */
+    background: transparent !important;
     box-shadow: none !important;
     padding: 0 2rem !important;
+    border-bottom: none !important;
+    position: relative; /* Важно для позиционирования псевдоэлемента */
 }
 
+/* Переносим стеклянный фон на псевдоэлемент.
+   Теперь он не будет "запирать" внутри себя fixed-элементы */
+.navbar::before {
+    content: '';
+    position: absolute;
+    inset: 0; /* Растягиваем на весь навбар (top, right, bottom, left = 0) */
+    background: var(--ifm-navbar-background-color);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Стилизуем саму выезжающую панель мобильного меню, чтобы она тоже была в стиле */
+.navbar-sidebar {
+    background: rgba(26, 22, 23, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* Уменьшаем паддинги навбара на мобилках, чтобы бургер и логотип не сжимались */
+@media (max-width: 996px) {
+    .navbar {
+        padding: 0 1rem !important;
+    }
+}
+
+/* Ваши старые стили для ссылок оставляем без изменений */
 .navbar__brand {
     font-family: 'Gilroy', sans-serif !important;
     font-size: 1.5rem !important;
@@ -253,6 +282,11 @@ html[data-theme='dark'] {
     background: rgba(255, 240, 245, 0.03) !important;
     color: #fafafa !important;
     border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.navbar__logo{
+    height: 1.4rem;
+    display: flex;
 }
 
 /* --- SIDEBAR (ЛЕВОЕ МЕНЮ) --- */
