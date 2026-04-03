@@ -107,12 +107,12 @@ Please Save this Screen!!
 3. Найдите строку с подключением `reality` и разверните её, нажав на иконку **+** (плюс) слева.
 4. В развернувшемся списке вы увидите готового клиента с именем `first`.
 
-![X-UI pro Panel](/docs/self-vpn/img/x-ui-pro-inbounds.png)
+![X-UI pro Panel](./img/x-ui-pro-inbounds.png)
 
 5. Нажмите на кнопку **More Information** (иконка `i` или QR-кода) рядом с именем клиента.
 6. В открывшемся окне найдите поле **Subscription URL** (Ссылка на подписку) и скопируйте её.
 
-![X-UI pro Panel](/docs/self-vpn/img/x-ui-pro-sub-url.png)
+![X-UI pro Panel](./img/x-ui-pro-sub-url.png)
 
 :::tip Подключение на устройстве
 Скопированную ссылку-подписку можно добавить в любой современный клиент, поддерживающий Xray/VLESS. Наиболее популярные и удобные решения:
