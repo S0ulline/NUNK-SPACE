@@ -1,0 +1,36 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master # Укажите ветку, в которую вы пушите (main или master)
+    # Игнорировать пуши, если изменения были только в этих файлах
+    paths-ignore:
+      - README.md
+      - .gitignore
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18 # Или версия Node, которую вы используете
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Папка, куда Docusaurus собирает готовый сайт
+          publish_dir: ./build
+          # Ветка, куда будет отправлен собранный сайт (создастся автоматически)
+          publish_branch: gh-pages

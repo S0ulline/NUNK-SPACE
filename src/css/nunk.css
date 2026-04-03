@@ -1,4 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+/* --- ПОДКЛЮЧЕНИЕ ЛОКАЛЬНЫХ ШРИФТОВ --- */
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy/Gilroy-Medium.woff2') format('woff2');
+    font-weight: 400; /* Используем Medium как базовый (Regular) */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy/Gilroy-Medium.woff2') format('woff2');
+    font-weight: 500; /* Medium */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy/Gilroy-Semibold.woff2') format('woff2');
+    font-weight: 600; /* SemiBold */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy/Gilroy-Bold.woff2') format('woff2');
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    /* Заменяем пробел в названии папки на %20 для корректной работы URL */
+    src: url('/fonts/JetBrains Mono/JetBrainsMono-Medium.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrains Mono/JetBrainsMono-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
 
 * {
     box-sizing: border-box;
@@ -10,7 +58,7 @@ html {
 }
 
 body {
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Gilroy', sans-serif !important;
     font-optical-sizing: auto;
     background: transparent !important;
     position: relative;
@@ -42,9 +90,9 @@ body {
     --ifm-background-color: #1a1617 !important;
     --ifm-background-surface-color: rgba(20, 16, 18, 0.7) !important;
 
-    --ifm-font-family-base: 'Outfit', sans-serif !important;
-    --ifm-font-family-monospace: 'Fira Mono', monospace !important;
-    --ifm-font-family-heading: 'Outfit', sans-serif !important;
+    --ifm-font-family-base: 'Gilroy', sans-serif !important;
+    --ifm-font-family-monospace: 'JetBrains Mono', monospace !important;
+    --ifm-font-family-heading: 'Gilroy', sans-serif !important;
 
     --ifm-color-primary: #a78bfa;
     --ifm-color-primary-dark: #9373eb;
@@ -176,7 +224,7 @@ html[data-theme='dark'] {
 }
 
 .navbar__brand {
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Gilroy', sans-serif !important;
     font-size: 1.5rem !important;
     font-weight: 800 !important;
     letter-spacing: 1px !important;
@@ -355,7 +403,7 @@ html[data-theme='dark'] {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important; /* Очень легкая линия разделителя */
     color: #a8a29e !important;
     padding: 12px 20px !important;
-    font-family: var(--ifm-font-family-base) !important;
+    font-family: 'JetBrains Mono', monospace !important;
     font-size: 0.9rem !important;
     font-weight: 600 !important;
     margin-bottom: 0 !important;
