@@ -214,15 +214,13 @@ html[data-theme='dark'] {
 
 /* --- NAVBAR (ВЕРХНЯЯ ПАНЕЛЬ) --- */
 .navbar {
-    /* Убираем жесткую высоту и backdrop-filter, чтобы не ломать мобильное меню.
-       Высота и так подтянется из переменной --ifm-navbar-height */
     background: transparent !important;
     box-shadow: none !important;
-    padding: 0 2rem !important;
     border-bottom: none !important;
-    position: relative; /* Важно для позиционирования псевдоэлемента */
+    position: sticky; /* Важно для позиционирования псевдоэлемента */
 }
 
+/* Переносим стеклянный фон на псевдоэлемент.
 /* Переносим стеклянный фон на псевдоэлемент.
    Теперь он не будет "запирать" внутри себя fixed-элементы */
 .navbar::before {
@@ -588,9 +586,9 @@ blockquote {
 }
 
 .alert--info {
-    background: rgba(255, 240, 245, 0.03) !important;
-    border-left: 4px solid var(--ifm-color-primary) !important;
-    color: #fff !important;
+    background: rgba(167, 139, 250, 0.1) !important;
+    border: 1px solid rgba(167, 139, 250, 0.3) !important;
+    color: #a78bfa !important;
 }
 
 .alert--danger {
@@ -698,5 +696,10 @@ blockquote {
 
     .navbar__brand {
         font-size: 1.2rem !important;
+    }
+
+    .navbar {
+        padding: 0 2rem !important;
+        position: relative;
     }
 }

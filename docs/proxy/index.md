@@ -75,11 +75,3 @@ sidebar_position: 4
 :::info Итог
 Прокси — это отличный точечный инструмент. Если вам нужно просто получить доступ к одному конкретному сайту или пустить через другой IP только трафик Telegram — прокси будет быстрее и удобнее. Но если вам нужна комплексная защита всего интернет-соединения от перехвата (например, в публичном Wi-Fi), лучше использовать полноценный VPN.
 :::
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
-
-
-<DocCardList items={[...[...useCurrentSidebarCategory().items].map((_,i)=>i<2?_:null).filter(Boolean)]} />
-```

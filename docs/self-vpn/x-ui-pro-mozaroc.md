@@ -51,7 +51,7 @@ sudo apt update && sudo apt upgrade -y
 После завершения процесса обновления системы, запускаем скрипт автоматической установки панели от *mozaroc*:
 
 ```bash
-bash <(wget -qO- [https://github.com/mozaroc/X-UI-pro/raw/master/X-UI-pro.sh](https://github.com/mozaroc/X-UI-pro/raw/master/X-UI-pro.sh)) -install yes -panel 1 -ONLY_CF_IP_ALLOW no
+bash <(wget -qO- https://github.com/mozaroc/x-ui-pro/raw/master/x-ui-pro.sh) -install yes -panel 1 -ONLY_CF_IP_ALLOW no
 ```
 
 ### Конфигурация в процессе установки
@@ -85,16 +85,16 @@ bash <(wget -qO- [https://github.com/mozaroc/X-UI-pro/raw/master/X-UI-pro.sh](ht
 ```text
 // highlight-start
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-X-UI Secure Panel: [https://net.free.com/sdfYTFekh/](https://net.free.com/sdfYTFekh/)
+X-UI Secure Panel: https://net.free.com/sdfYTFekh/
 
 Username:  HrZ0A7fN1B 
 
 Password:  AkwbASVYAA 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // highlight-end
-Web Sub Page your first client: [https://net.free.com/IasdzB?name=first](https://net.free.com/IasdzB?name=first)
+Web Sub Page your first client: https://net.free.com/IasdzB?name=first
 
-Your local sub2sing-box instance: [https://net.free.com/ASDygeniudT/](https://net.free.com/ASDygeniudT/)
+Your local sub2sing-box instance: https://net.free.com/ASDygeniudT/
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Please Save this Screen!!

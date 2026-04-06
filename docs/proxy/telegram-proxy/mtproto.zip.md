@@ -26,7 +26,7 @@ sidebar_position: 2
 Подключитесь к вашему VPS по SSH и выполните следующую команду:
 
 ```bash
-curl -sSf [https://raw.githubusercontent.com/sleep3r/mtproto.zig/main/deploy/install.sh](https://raw.githubusercontent.com/sleep3r/mtproto.zig/main/deploy/install.sh) | sudo bash
+curl -sSf https://raw.githubusercontent.com/sleep3r/mtproto.zig/main/deploy/install.sh | sudo bash
 ```
 
 :::info Что делает этот скрипт?

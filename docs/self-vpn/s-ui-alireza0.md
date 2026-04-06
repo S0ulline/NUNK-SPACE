@@ -38,7 +38,7 @@ sudo apt update && sudo apt upgrade -y
 После этого запускаем скрипт установки S-UI:
 
 ```bash
-bash <(curl -Ls [https://raw.githubusercontent.com/alireza0/s-ui/master/install.sh](https://raw.githubusercontent.com/alireza0/s-ui/master/install.sh))
+bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/master/install.sh)
 ```
 
 В процессе установки скрипт задаст несколько вопросов:
@@ -70,7 +70,7 @@ http://<ip-вашего-сервера>:8443/<ваш-путь-панели>
 ```
 
 :::danger Важно
-Обязательно скопируйте и сохраните эту ссылку\! Путь генерируется случайным образом.
+Обязательно скопируйте и сохраните эту ссылку\!
 :::
 
 -----
@@ -104,8 +104,8 @@ certbot certonly --standalone --register-unsafely-without-email --non-interactiv
 
 ```text
 Successfully received certificate.
-Certificate is saved at: /etc/letsencrypt/live/[net.free.com/fullchain.pem](https://net.free.com/fullchain.pem)
-Key is saved at:         /etc/letsencrypt/live/[net.free.com/privkey.pem](https://net.free.com/privkey.pem)
+Certificate is saved at: /etc/letsencrypt/live/net.free.com/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/net.free.com/privkey.pem
 ```
 
 Скопируйте пути к `fullchain.pem` и `privkey.pem` — они нам скоро понадобятся.
