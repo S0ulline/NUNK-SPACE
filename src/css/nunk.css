@@ -476,13 +476,19 @@ html[data-theme='dark'] {
 }
 
 p code {
-    background: none !important;
+    background: hsl(0deg 0% 100% / 5%);
     color: var(--ifm-color-primary) !important;
+    border-radius: 5px;
+    padding: 1px 6px;
+    border: 1px solid hsl(0deg 0% 100% / 5%);
 }
 
 li code {
-    background: none !important;
+    background: hsl(0deg 0% 100% / 5%);
     color: var(--ifm-color-primary) !important;
+    border-radius: 5px;
+    padding: 1px 6px;
+    border: 1px solid hsl(0deg 0% 100% / 5%);
 }
 
 .theme-code-block-highlighted-line{
@@ -630,7 +636,6 @@ blockquote {
     border: 1px solid rgba(255, 255, 255, 0.06) !important; /* Полупрозрачная белая обводка */
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
     margin-top: 20px !important;
 }
 
