@@ -475,20 +475,18 @@ html[data-theme='dark'] {
     background: none !important;
 }
 
-p code {
-    background: hsl(0deg 0% 100% / 5%);
-    color: var(--ifm-color-primary) !important;
-    border-radius: 5px;
-    padding: 1px 6px;
-    border: 1px solid hsl(0deg 0% 100% / 5%);
+p code,
+li code{
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px !important;
+    padding: 2px 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-li code {
-    background: hsl(0deg 0% 100% / 5%);
-    color: var(--ifm-color-primary) !important;
-    border-radius: 5px;
-    padding: 1px 6px;
-    border: 1px solid hsl(0deg 0% 100% / 5%);
+li div code {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 16px !important;
 }
 
 .theme-code-block-highlighted-line{
@@ -707,4 +705,72 @@ blockquote {
         padding: 0 2rem !important;
         position: relative;
     }
+}
+
+/* --- СТИЛИЗАЦИЯ ПОДСВЕТКИ КОДА (ТЕМА Gerry Dark) --- */
+
+/* Базовый фон и цвет обычного текста */
+.theme-code-block .prism-code {
+    color: #afb9c3 !important;      /* Основной текст [cite: 92] */
+}
+
+/* Ключевые слова (if, else, function, return, const) */
+.prism-code .token.keyword {
+    color: #c88cdc !important;      /* Фиолетовый [cite: 29] */
+}
+
+/* Строки ("текст", 'текст') и значения атрибутов */
+.prism-code .token.string,
+.prism-code .token.char,
+.prism-code .token.attr-value {
+    color: #96be78 !important;      /* Зеленый [cite: 32] */
+}
+
+/* Числа */
+.prism-code .token.number {
+    color: #36beff !important;      /* Голубой [cite: 30] */
+}
+
+/* Функции, методы и классы */
+.prism-code .token.function,
+.prism-code .token.class-name,
+.prism-code .token.builtin {
+    color: #ffc86e !important;      /* Желто-оранжевый [cite: 27] */
+}
+
+/* Переменные и свойства объектов */
+.prism-code .token.property,
+.prism-code .token.variable {
+    color: #ff9696 !important;      /* Розово-красный [cite: 28] */
+}
+
+/* Параметры функций и аргументы */
+.prism-code .token.parameter,
+.prism-code .token.interpolation {
+    color: #61afe1 !important;      /* Синий [cite: 31] */
+}
+
+/* HTML/XML Теги */
+.prism-code .token.tag {
+    color: #ff9696 !important;      /* Розово-красный [cite: 44] */
+}
+
+/* Атрибуты HTML/XML (например, class="", href="") */
+.prism-code .token.attr-name {
+    color: #ffc86e !important;      /* Желто-оранжевый [cite: 25] */
+}
+
+/* Комментарии */
+.prism-code .token.comment,
+.prism-code .token.prolog,
+.prism-code .token.doctype,
+.prism-code .token.cdata {
+    color: #808080 !important;      /* Серый [cite: 26] */
+    font-style: italic !important;
+}
+
+/* Операторы (+, -, =, >) и знаки препинания */
+.prism-code .token.operator,
+.prism-code .token.punctuation {
+    color: #afb9c3 !important;      /* В тон базовому тексту [cite: 92] */
 }

@@ -54,14 +54,18 @@ sudo nano /opt/mtproto-proxy/config.toml
 
 Пример базового конфигурационного файла:
 
-```toml
+```toml title="config.toml"
 [server]
 port = 443
-# Опционально: 32-символьный hex-тег вашего спонсорского канала (от @MTProxybot)
-# tag = "ваш-тег-здесь" 
+tag = "ваш-тег-здесь" # Опционально: 32-символьный hex-тег вашего спонсорского канала (от @MTProxybot)
 
-# Рекомендуется включить для клиентов на базе iOS
-fast_mode = true
+[censorship]
+tls_domain = "wb.ru"
+mask = false
+fast_mode = true # Рекомендуется включить для клиентов на базе iOS
+
+[access.users]
+user = "сгенерированный-секрет"
 ```
 
 :::tip Зачем нужен Fast Mode?
