@@ -84,23 +84,19 @@ sudo systemctl restart mtproto-proxy
 
 Так как наш MTProto прокси работает как системная служба, вы можете управлять им стандартными командами Linux:
 
-* **Проверить статус работы и последние логи:**
-  ```bash
+  ```bash title="Проверить статус работы и последние логи"
   sudo systemctl status mtproto-proxy
   ```
 
-* **Перезапустить службу (применяет новые настройки config.toml):**
-  ```bash
+  ```bash title="Перезапустить службу (применяет новые настройки config.toml)"
   sudo systemctl restart mtproto-proxy
   ```
 
-* **Остановить службу:**
-  ```bash
+  ```bash title="Остановить службу"
   sudo systemctl stop mtproto-proxy
   ```
 
-* **Просмотреть подробный журнал работы в реальном времени:**
-  ```bash
+  ```bash title="Просмотреть подробный журнал работы в реальном времени"
   sudo journalctl -u mtproto-proxy -f
   ```
 

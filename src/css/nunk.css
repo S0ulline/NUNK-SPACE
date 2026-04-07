@@ -491,6 +491,7 @@ li div code {
 
 .theme-code-block-highlighted-line{
     background: rgba(139, 92, 246, 0.15) !important;
+    border-left: 2px solid var(--ifm-color-primary) !important;;
 }
 
 blockquote {
