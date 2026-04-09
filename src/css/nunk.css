@@ -590,6 +590,12 @@ blockquote {
     border: none !important;
 }
 
+.alert.alert--gratitude {
+    background: hsl(330deg 50% 60% / 10%) !important;
+    border: 1px solid hsl(330deg 50% 60% / 30%) !important;
+    color: hsl(330 90% 82% / 1) !important;
+}
+
 .alert--info {
     background: rgba(167, 139, 250, 0.1) !important;
     border: 1px solid rgba(167, 139, 250, 0.3) !important;

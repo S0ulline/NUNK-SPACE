@@ -43,6 +43,11 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          showLastUpdateTime: true,
+          admonitions: {
+            keywords: ['gratitude'], // Наше новое кодовое слово
+            extendDefaults: true,    // Сохраняем встроенные tip, info и т.д.
+          },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:

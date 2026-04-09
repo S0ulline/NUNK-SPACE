@@ -223,3 +223,9 @@ Key is saved at:         /etc/letsencrypt/live/net.free.com/privkey.pem
 Вас интересует QR-код с подписью **Subscription**. Просто нажмите на сам QR-код, и ссылка на подписку автоматически скопируется в буфер обмена.
 
 Теперь эту ссылку можно вставить в любой клиент (например, NekoBox, Hiddify или v2rayNG), и у вас появится доступ сразу к двум мощным протоколам: VLESS+Reality и Hysteria 2\!
+
+---
+
+:::gratitude
+* Автор репозитория [S-UI](https://github.com/alireza0/s-ui) - [alireza0](https://github.com/alireza0)
+:::

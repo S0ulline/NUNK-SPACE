@@ -123,3 +123,10 @@ Please Save this Screen!!
   :::
 
 Вставьте ссылку в выбранное приложение (обычно это раздел "Subscriptions", "Подписки" или "Группы"), обновите подписку, и у вас появится готовое к использованию защищенное VPN-подключение!
+
+---
+
+:::gratitude
+* Автор оригинального репозитория [x-ui-pro](https://github.com/GFW4Fun/x-ui-pro) - [GFW4Fun](https://github.com/GFW4Fun)
+* Автор форка [x-ui-pro](https://github.com/mozaroc/x-ui-pro) - [mozaroc](https://github.com/mozaroc)
+:::

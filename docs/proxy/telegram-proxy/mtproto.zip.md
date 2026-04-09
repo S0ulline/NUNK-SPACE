@@ -110,3 +110,9 @@ sudo systemctl restart mtproto-proxy
 `tg://proxy?server=<ВАШ_IP>&port=443&secret=<ВАШ_СЕКРЕТНЫЙ_КЛЮЧ>`
 
 При клике на такую ссылку со смартфона или ПК, Telegram автоматически предложит добавить и включить новые настройки проксирования. Вся дальнейшая переписка будет надежно маршрутизироваться через ваш сервер.
+
+---
+
+:::gratitude
+* Автор репозитория [mtproto.zig](https://github.com/sleep3r/mtproto.zig) - [sleep3r](https://github.com/sleep3r)
+:::
