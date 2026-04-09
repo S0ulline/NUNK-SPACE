@@ -1,7 +1,6 @@
 ---
 title: Прокси для Telegram (MTProto и SOCKS5)
 description: Особенности работы встроенной системы проксирования в Telegram. Разница между SOCKS5 и MTProto, а также виды секретных ключей.
-sidebar_position: 1
 ---
 
 # Прокси для Telegram: Особенности и протоколы

@@ -107,10 +107,9 @@ function HomepageFeatures() {
 
 // Главный компонент страницы
 export default function Home() {
-    const {siteConfig} = useDocusaurusContext();
     return (
         <Layout
-            title={`Главная | ${siteConfig.title}`}
+            title="Главная"
             description="База знаний по сетевым технологиям и VPN">
             <HomepageHeader />
             <main>

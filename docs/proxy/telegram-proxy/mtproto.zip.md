@@ -1,7 +1,7 @@
 ---
 title: Установка и настройка mtproto.zig
 description: Руководство по развертыванию сверхбыстрого MTProto прокси для Telegram, написанного на языке Zig, с маскировкой трафика под TLS 1.3.
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Развертывание собственного MTProto Proxy (mtproto.zig)

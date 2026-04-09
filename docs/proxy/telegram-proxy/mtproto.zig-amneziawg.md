@@ -1,7 +1,7 @@
 ---
 title: Настройка mtproto.zig через туннель AmneziaWG
 description: Доп. материал по развертыванию прокси сервера mtproto.zig через туннель AmneziaWG
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Настройка mtproto.zig через туннель AmneziaWG
