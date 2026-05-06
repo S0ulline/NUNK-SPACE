@@ -1,7 +1,10 @@
 #!/bin/bash
-
 # ============================================================
 #  Selectel Roller — установщик
+#  Поддерживает два режима:
+#    1. Интерактивный:   bash install_ip_roll.sh
+#    2. Автоматический:  AUTOINSTALL=1 bash install_ip_roll.sh
+#       (используется оркестратором при удалённой установке)
 # ============================================================
 
 RED='\033[0;31m'
@@ -12,11 +15,13 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 INSTALL_DIR="/root/selectel_roller"
-SERVICE_NAME="ip-roll"
 MENU_CMD="/usr/local/bin/ip-roll"
 
+# ── Флаг автоматического режима (передаётся оркестратором) ──
+AUTOINSTALL="${AUTOINSTALL:-0}"
+
 is_installed() {
-    [ -d "$INSTALL_DIR" ]
+    [ -f "$INSTALL_DIR/main.py" ]
 }
 
 print_banner() {
@@ -27,48 +32,79 @@ print_banner() {
     echo -e "${NC}"
 }
 
+# ── Вывод ошибки и выход с кодом 1 ──────────────────────────
+fail() {
+    echo -e "${RED}${BOLD}[✗] ОШИБКА: $1${NC}" >&2
+    exit 1
+}
+
 do_install() {
     echo -e "${YELLOW}[*] Обновление пакетов и установка зависимостей...${NC}"
-    sudo apt update && sudo apt install -y python3.12 python3.12-venv python3-pip git
+    apt-get update -qq \
+        && apt-get install -y -qq python3.12 python3.12-venv python3-pip git curl \
+        || fail "Не удалось установить системные зависимости"
 
     if is_installed; then
         echo -e "${YELLOW}[!] Директория уже существует: ${INSTALL_DIR}${NC}"
     else
         echo -e "${YELLOW}[*] Клонирование репозитория...${NC}"
-        cd /root/ && git clone https://github.com/bymakk/selectel_roller.git
+        git clone https://github.com/bymakk/selectel_roller.git "$INSTALL_DIR" \
+            || fail "Не удалось клонировать репозиторий"
     fi
 
-    cd "$INSTALL_DIR" || exit 1
+    cd "$INSTALL_DIR" || fail "Не удалось войти в $INSTALL_DIR"
 
     echo -e "${YELLOW}[*] Создание виртуального окружения...${NC}"
-    python3.12 -m venv venv
+    python3.12 -m venv venv                                         || fail "venv не создан"
     source venv/bin/activate
-    pip install -r requirements.txt 2>/dev/null || true
+    pip install -q --upgrade pip
+    pip install -q -r requirements.txt                              || fail "pip install завершился с ошибкой"
 
-    cat > "$INSTALL_DIR/.env" <<EOF
-SEL_USERNAME=ip-ariel
-SEL_PASSWORD="lsw;'<om'D0qgVSwQ#ju"
-SEL_ACCOUNT_ID=584996
-SEL_PROJECT_NAME=MainProj
-SEL_PROJECT_ID=0d05743e28f249f5bea8098ea50eee21
+    # ── .env: в автоматическом режиме создаём пустой шаблон ─
+    if [ ! -f "$INSTALL_DIR/.env" ]; then
+        echo -e "${YELLOW}[*] Создаю шаблон .env...${NC}"
+        cat > "$INSTALL_DIR/.env" <<'EOF'
+# Первый аккаунт Selectel
+SEL_USERNAME=
+SEL_PASSWORD=
+SEL_ACCOUNT_ID=
+SEL_PROJECT_NAME=
+SEL_PROJECT_ID=
+SEL_SERVER_ID_RU2=
+SEL_SERVER_ID_RU3=
 
-SEL2_USERNAME=ip-sabina
-SEL2_PASSWORD="}x@Yuzu+4RL%;{uW(+_Q"
-SEL2_ACCOUNT_ID=588499
-SEL2_PROJECT_NAME=My First Project
-SEL2_PROJECT_ID=dacf059d87d04a44a1c9c25e9cae91f3
+# Второй аккаунт Selectel (если нужен)
+SEL2_USERNAME=
+SEL2_PASSWORD=
+SEL2_ACCOUNT_ID=
+SEL2_PROJECT_NAME=
+SEL2_PROJECT_ID=
+SEL2_SERVER_ID_RU2=
+SEL2_SERVER_ID_RU3=
+
+# Регионы (через запятую: ru-1,ru-2,ru-3)
+SEL1_SCANNER_REGIONS=ru-1,ru-2,ru-3
+SEL2_SCANNER_REGIONS=ru-1,ru-2,ru-3
+
+# Скорость
+SEL_MAX_IPS_PER_MINUTE=30
+SEL_BATCH_SIZE=1
+SEL_MAX_BATCH_SIZE=1
+SEL_DELETE_CONCURRENCY=8
 EOF
+        echo -e "${YELLOW}[!] Заполните .env своими данными перед первым запуском!${NC}"
+    fi
 
     chmod +x "$INSTALL_DIR/run.sh" 2>/dev/null || true
 
-    # ── Регистрация команды ip-roll ──────────────────────────
-    sudo tee "$MENU_CMD" > /dev/null <<'SCRIPT'
+    # ── Команда ip-roll ─────────────────────────────────────
+    cat > "$MENU_CMD" <<'SCRIPT'
 #!/bin/bash
 bash /root/selectel_roller/menu.sh
 SCRIPT
-    sudo chmod +x "$MENU_CMD"
+    chmod +x "$MENU_CMD"
 
-    # ── Сохранение menu.sh рядом с проектом ─────────────────
+    # ── menu.sh ─────────────────────────────────────────────
     cat > "$INSTALL_DIR/menu.sh" <<'MENU'
 #!/bin/bash
 
@@ -81,7 +117,7 @@ NC='\033[0m'
 
 INSTALL_DIR="/root/selectel_roller"
 
-is_installed() { [ -d "$INSTALL_DIR" ]; }
+is_installed() { [ -f "$INSTALL_DIR/main.py" ]; }
 
 while true; do
     clear
@@ -98,7 +134,7 @@ while true; do
     fi
 
     echo ""
-    echo -e "  ${BOLD}1)${NC} Установить / Запустить"
+    echo -e "  ${BOLD}1)${NC} Запустить"
     echo -e "  ${BOLD}2)${NC} Удалить"
     echo -e "  ${BOLD}0)${NC} Выход"
     echo ""
@@ -121,7 +157,7 @@ while true; do
                 read -rp "  Удалить ${INSTALL_DIR}? [y/N]: " confirm
                 if [[ "$confirm" =~ ^[Yy]$ ]]; then
                     rm -rf "$INSTALL_DIR"
-                    sudo rm -f /usr/local/bin/ip-roll
+                    rm -f /usr/local/bin/ip-roll
                     echo -e "${GREEN}[✓] Удалено.${NC}"
                     sleep 2
                     exit 0
@@ -131,9 +167,7 @@ while true; do
                 sleep 2
             fi
             ;;
-        0)
-            exit 0
-            ;;
+        0) exit 0 ;;
         *)
             echo -e "\n${RED}[!] Неверный выбор.${NC}"
             sleep 1
@@ -141,20 +175,34 @@ while true; do
     esac
 done
 MENU
-
     chmod +x "$INSTALL_DIR/menu.sh"
 
     echo -e "\n${GREEN}${BOLD}[✓] Установка завершена!${NC}"
-    echo -e "  Для управления введите: ${CYAN}${BOLD}ip-roll${NC}\n"
+    if [ "$AUTOINSTALL" = "1" ]; then
+        echo -e "  Оркестратор продолжит работу автоматически."
+    else
+        echo -e "  Для управления введите: ${CYAN}${BOLD}ip-roll${NC}\n"
+    fi
 }
 
 # ── Точка входа ──────────────────────────────────────────────
 print_banner
 
-if is_installed; then
-    echo -e "${GREEN}[✓] Уже установлено.${NC} Открываю меню...\n"
-    sleep 1
-    bash "$INSTALL_DIR/menu.sh"
-else
+if [ "$AUTOINSTALL" = "1" ]; then
+    # ── Автоматический режим (вызван оркестратором) ──────────
+    if is_installed; then
+        echo -e "${GREEN}[✓] selectel_roller уже установлен. Пропускаю.${NC}"
+        exit 0
+    fi
+    echo -e "${YELLOW}[*] Автоматическая установка...${NC}"
     do_install
+else
+    # ── Интерактивный режим ──────────────────────────────────
+    if is_installed; then
+        echo -e "${GREEN}[✓] Уже установлено.${NC} Открываю меню...\n"
+        sleep 1
+        bash "$INSTALL_DIR/menu.sh"
+    else
+        do_install
+    fi
 fi
