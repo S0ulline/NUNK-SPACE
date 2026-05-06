@@ -45,58 +45,18 @@ do_install() {
     source venv/bin/activate
     pip install -r requirements.txt 2>/dev/null || true
 
-    # ── Заполнение .env ──────────────────────────────────────
-    echo -e "${CYAN}${BOLD}"
-    echo "  ┌─────────────────────────────────────────┐"
-    echo "  │   Настройка .env — Аккаунт 1 (SEL)     │"
-    echo "  └─────────────────────────────────────────┘"
-    echo -e "${NC}"
-
-    read -rp "  SEL_USERNAME       : " SEL_USERNAME
-    read -rsp "  SEL_PASSWORD       : " SEL_PASSWORD; echo
-    read -rp "  SEL_ACCOUNT_ID     : " SEL_ACCOUNT_ID
-    read -rp "  SEL_PROJECT_NAME   : " SEL_PROJECT_NAME
-
-    echo -e "${CYAN}${BOLD}"
-    echo "  ┌─────────────────────────────────────────┐"
-    echo "  │   Настройка .env — Аккаунт 2 (SEL2)    │"
-    echo "  └─────────────────────────────────────────┘"
-    echo -e "${NC}"
-
-    read -rp "  SEL2_USERNAME      : " SEL2_USERNAME
-    read -rsp "  SEL2_PASSWORD      : " SEL2_PASSWORD; echo
-    read -rp "  SEL2_ACCOUNT_ID    : " SEL2_ACCOUNT_ID
-    read -rp "  SEL2_PROJECT_NAME  : " SEL2_PROJECT_NAME
-
     cat > "$INSTALL_DIR/.env" <<EOF
-SEL_USERNAME=${SEL_USERNAME}
-SEL_PASSWORD="${SEL_PASSWORD}"
-SEL_ACCOUNT_ID=${SEL_ACCOUNT_ID}
-SEL_PROJECT_NAME=${SEL_PROJECT_NAME}
-SEL_PROJECT_ID=
+SEL_USERNAME=ip-ariel
+SEL_PASSWORD="lsw;'<om'D0qgVSwQ#ju"
+SEL_ACCOUNT_ID=584996
+SEL_PROJECT_NAME=MainProj
+SEL_PROJECT_ID=0d05743e28f249f5bea8098ea50eee21
 
-SEL2_USERNAME=${SEL2_USERNAME}
-SEL2_PASSWORD="${SEL2_PASSWORD}"
-SEL2_ACCOUNT_ID=${SEL2_ACCOUNT_ID}
-SEL2_PROJECT_NAME=${SEL2_PROJECT_NAME}
-SEL2_PROJECT_ID=
-
-# --- Регионы (опционально) ---
-# SEL1_SCANNER_REGIONS=ru-1,ru-2,ru-3
-# SEL2_SCANNER_REGIONS=ru-1,ru-2,ru-3
-
-# ========== Скорость перебора IP и тайминги (опционально) ==========
-# SEL_MAX_IPS_PER_MINUTE=30
-# SEL_TARGET_COUNT=1
-# SEL_BATCH_SIZE=1
-# SEL_MAX_BATCH_SIZE=1
-# SEL_DELETE_CONCURRENCY=8
-# SEL_COOLDOWN_BASE=2.0
-# SEL_COOLDOWN_MAX=60
-# SEL_RECONCILE_INTERVAL=7
-# SEL_ALLOCATION_POLL_ATTEMPTS=5
-# SEL_ALLOCATION_POLL_DELAY=0.45
-# SEL_REFRESH_PER_SECOND=6
+SEL2_USERNAME=ip-sabina
+SEL2_PASSWORD="}x@Yuzu+4RL%;{uW(+_Q"
+SEL2_ACCOUNT_ID=588499
+SEL2_PROJECT_NAME=My First Project
+SEL2_PROJECT_ID=dacf059d87d04a44a1c9c25e9cae91f3
 EOF
 
     chmod +x "$INSTALL_DIR/run.sh" 2>/dev/null || true
